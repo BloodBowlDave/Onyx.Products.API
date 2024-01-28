@@ -27,9 +27,8 @@ namespace Onyx.Products.API
 
 			app.UseAuthorization();
 
-
 			app.MapControllers();
-
+			
 			app.Run();
 		}
 	}
