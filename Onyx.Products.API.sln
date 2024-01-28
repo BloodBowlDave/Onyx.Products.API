@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Onyx.Products.API", "Onyx.Products.API\Onyx.Products.API.csproj", "{B4A4D658-E335-4732-B2E4-DACC7B97C865}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8EBA6898-2F36-4057-B7FA-52DA9B3AD8A0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Onyx.Products.API", "src\Onyx.Products.API\Onyx.Products.API.csproj", "{E4FB19D3-7849-49BD-8807-84452FB6D8D9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{BF9041B1-65EC-487C-94B1-614E36F09AE2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,13 +15,16 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B4A4D658-E335-4732-B2E4-DACC7B97C865}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B4A4D658-E335-4732-B2E4-DACC7B97C865}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B4A4D658-E335-4732-B2E4-DACC7B97C865}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B4A4D658-E335-4732-B2E4-DACC7B97C865}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4FB19D3-7849-49BD-8807-84452FB6D8D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4FB19D3-7849-49BD-8807-84452FB6D8D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4FB19D3-7849-49BD-8807-84452FB6D8D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4FB19D3-7849-49BD-8807-84452FB6D8D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E4FB19D3-7849-49BD-8807-84452FB6D8D9} = {8EBA6898-2F36-4057-B7FA-52DA9B3AD8A0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {43582B06-D889-4AF1-B2EC-4850A7F1A94C}
