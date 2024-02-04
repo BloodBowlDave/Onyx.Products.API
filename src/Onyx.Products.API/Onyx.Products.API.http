@@ -1,6 +1,0 @@
-@Onyx.Products.API_HostAddress = http://localhost:5111
-
-GET {{Onyx.Products.API_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

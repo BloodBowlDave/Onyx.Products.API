@@ -1,22 +1,52 @@
+using Microsoft.OpenApi.Models;
+using Onyx.Products.API.Authentication;
 
 namespace Onyx.Products.API
 {
-	public class Program
+	public partial class Program
 	{
 		public static void Main(string[] args)
 		{
 			var builder = WebApplication.CreateBuilder(args);
 
-			// Add services to the container.
+			var services = builder.Services;
 
-			builder.Services.AddControllers();
-			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-			builder.Services.AddEndpointsApiExplorer();
-			builder.Services.AddSwaggerGen();
+			services.AddControllers();
+			services.AddScoped<ApiKeyAuthenticationFilter>();
+
+			services.AddEndpointsApiExplorer();
+			services.AddSwaggerGen(x =>
+			{
+				x.AddSecurityDefinition("ApiKey",
+					new OpenApiSecurityScheme
+					{
+						Description = "The API Key to access the API",
+						Type = SecuritySchemeType.ApiKey,
+						Name = "x-api-key",
+						In = ParameterLocation.Header,
+						Scheme = "ApiKeyScheme"
+					});
+
+				var scheme = new OpenApiSecurityScheme
+				{
+					Reference = new OpenApiReference
+					{
+						Type = ReferenceType.SecurityScheme,
+						Id = "ApiKey"
+					},
+					In = ParameterLocation.Header
+				};
+
+				var requirement = new OpenApiSecurityRequirement
+				{
+					{ scheme, new List<string>() }
+				};
+
+				x.AddSecurityRequirement(requirement);
+			});
 
 			var app = builder.Build();
 
-			// Configure the HTTP request pipeline.
 			if (app.Environment.IsDevelopment())
 			{
 				app.UseSwagger();
@@ -26,9 +56,8 @@ namespace Onyx.Products.API
 			app.UseHttpsRedirection();
 
 			app.UseAuthorization();
-
 			app.MapControllers();
-			
+
 			app.Run();
 		}
 	}

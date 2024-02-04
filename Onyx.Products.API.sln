@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Onyx.Products.API", "src\On
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{BF9041B1-65EC-487C-94B1-614E36F09AE2}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Onyx.Products.API.IntegrationTests", "tests\Onyx.Products.API.IntegrationTests\Onyx.Products.API.IntegrationTests.csproj", "{C672C635-577F-473C-8493-0191535D5CDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,12 +21,17 @@ Global
 		{E4FB19D3-7849-49BD-8807-84452FB6D8D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4FB19D3-7849-49BD-8807-84452FB6D8D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4FB19D3-7849-49BD-8807-84452FB6D8D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C672C635-577F-473C-8493-0191535D5CDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C672C635-577F-473C-8493-0191535D5CDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C672C635-577F-473C-8493-0191535D5CDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C672C635-577F-473C-8493-0191535D5CDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E4FB19D3-7849-49BD-8807-84452FB6D8D9} = {8EBA6898-2F36-4057-B7FA-52DA9B3AD8A0}
+		{C672C635-577F-473C-8493-0191535D5CDA} = {BF9041B1-65EC-487C-94B1-614E36F09AE2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {43582B06-D889-4AF1-B2EC-4850A7F1A94C}
