@@ -5,5 +5,5 @@ namespace Onyx.Products.API.Features.Products;
 public interface IProductsRepository
 {
 	public IList<Product> GetAll();
-	public Product? GetById(Guid id);
+	public IList<Product> GetByColour(Colour colour);
 }

@@ -17,8 +17,8 @@ public class FakeProductsRepository : IProductsRepository
 		return _products;
 	}
 
-	public Product? GetById(Guid id)
+	public IList<Product> GetByColour(Colour colour)
 	{
-		return _products.FirstOrDefault(x => x.Id == id);
+		return _products.Where(x => x.Colour == colour).ToList();
 	}
 }

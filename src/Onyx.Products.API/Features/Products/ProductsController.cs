@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Onyx.Products.API.Authentication;
+using Onyx.Products.API.Features.Products.ViewModels;
 
 namespace Onyx.Products.API.Features.Products
 {
@@ -19,6 +20,20 @@ namespace Onyx.Products.API.Features.Products
 		public IActionResult GetProducts()
 		{
 			var products = _productsRepository.GetAll();
+
+			return Ok(products);
+		}
+
+		[HttpGet]
+		[Route("by-colour/{colour}")]
+		public IActionResult GetProductsByColour(string colour)
+		{
+			if (!Enum.TryParse(colour, true, out Colour parsedColour))
+			{
+				return BadRequest();
+			}
+
+			var products = _productsRepository.GetByColour(parsedColour);
 
 			return Ok(products);
 		}
