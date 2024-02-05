@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Onyx.Products.API.Authentication;
-using Onyx.Products.API.Features.Products.ViewModels;
 
 namespace Onyx.Products.API.Features.Products
 {
@@ -9,17 +8,17 @@ namespace Onyx.Products.API.Features.Products
 	[ApiController]
 	public class ProductsController : ControllerBase
 	{
+		private readonly IProductsRepository _productsRepository;
+
+		public ProductsController(IProductsRepository productsRepository)
+		{
+			_productsRepository = productsRepository;
+		}
+
 		[HttpGet]
 		public IActionResult GetProducts()
 		{
-			var products = new List<Product>
-			{
-				new Product()
-				{
-					Id = Guid.NewGuid(),
-					Name = "Test Product"
-				}
-			};
+			var products = _productsRepository.GetAll();
 
 			return Ok(products);
 		}

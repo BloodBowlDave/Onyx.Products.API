@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
+﻿using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using Onyx.Products.API.Features.Products;
 using Onyx.Products.API.Features.Products.ViewModels;
 using Xunit;
 
@@ -8,16 +10,27 @@ namespace Onyx.Products.API.IntegrationTests.Features.Products
 	public class ProductsTests : IClassFixture<CustomWebApplicationFactory<Program>>
 	{
 		private readonly HttpClient _client;
-		private readonly CustomWebApplicationFactory<Program> _factory;
-
-		public ProductsTests(
-			CustomWebApplicationFactory<Program> factory)
+		private static readonly Guid TestProductId = new("805d39a9-7df4-4c23-8432-ca4cf82ccb4f");
+		private const string TestProductName = "Test Product";
+		private readonly List<Product> _products = new()
 		{
-			_factory = factory;
-			_client = factory.CreateClient(new WebApplicationFactoryClientOptions
+			new Product
 			{
-				AllowAutoRedirect = false
-			});
+				Id = TestProductId,
+				Name = TestProductName
+			}
+		};
+
+		public ProductsTests(CustomWebApplicationFactory<Program> factory)
+		{
+			_client = factory.WithWebHostBuilder(builder =>
+			{
+				builder.ConfigureTestServices(services =>
+				{
+					services.AddScoped<IProductsRepository>(x =>
+						new FakeProductsRepository(_products));
+				});
+			}).CreateClient();
 		}
 
 		[Fact]
@@ -53,7 +66,7 @@ namespace Onyx.Products.API.IntegrationTests.Features.Products
 		}
 
 		[Fact]
-		public async Task WhenGettingProductsWithCorrectApiKeyThenReceiveSuccessStatusCodeAndProductsInResponse()
+		public async Task WhenGettingProductsThenReceiveSuccessStatusCodeAndProductsInResponse()
 		{
 			// Arrange
 			var request = new HttpRequestMessage()
@@ -75,7 +88,11 @@ namespace Onyx.Products.API.IntegrationTests.Features.Products
 
 			Assert.NotNull(products);
 			Assert.Collection(products, 
-				x => Assert.Equal("Test Product", x.Name));
+				x =>
+				{
+					Assert.Equal(TestProductId, x.Id);
+					Assert.Equal(TestProductName, x.Name);
+				});
 		}
 	}
 }
