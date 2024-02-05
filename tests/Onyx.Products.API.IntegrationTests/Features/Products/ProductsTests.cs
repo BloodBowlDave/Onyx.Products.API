@@ -117,6 +117,31 @@ namespace Onyx.Products.API.IntegrationTests.Features.Products
 		}
 
 		[Fact]
+		public async Task WhenGettingProductsWithNoMatchingColourThenReceiveSuccessStatusCodeAndEmptyResponse()
+		{
+			// Arrange
+			var request = new HttpRequestMessage()
+			{
+				Method = HttpMethod.Get,
+				RequestUri = new Uri("/api/products/by-colour/red", UriKind.RelativeOrAbsolute)
+			};
+
+			request.Headers.Add("x-api-key", "e21ed312cc9d4ae79bb57af54dc6acca");
+
+			// Act
+			var response = await _client.SendAsync(request);
+
+			// Assert
+			Assert.Equal(200, (int)response.StatusCode);
+
+			var responseContent = await response.Content.ReadAsStringAsync();
+			var products = JsonConvert.DeserializeObject<List<Product>>(responseContent);
+
+			Assert.NotNull(products);
+			Assert.Empty(products);
+		}
+
+		[Fact]
 		public async Task WhenGettingProductsByColourThenReceiveSuccessStatusCodeAndMatchingProducts()
 		{
 			// Arrange
